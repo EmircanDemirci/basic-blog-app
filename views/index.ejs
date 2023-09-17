@@ -1,0 +1,29 @@
+<html lang="en">
+    <%- include('./partials/header.ejs') %>
+    <title><%= title %></title>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <div class="section">
+        <%if(blogs.length>0){%>
+            <% blogs.forEach(blog=>{%>
+                <div class="card">
+                    <div class="card-1">
+                        <hr/>
+                    </div>
+                    <div class="card-2">
+                        <hr>
+                        <a href="/blog/<%=blog._id%>" class="title card-title"><%= blog.title %></a>
+                        <hr>
+                        <p class="snippet card-text"><%= blog.snippet %></p>
+                    </div>
+                </div>
+                
+           <% }) %>
+        
+        <%}%>
+    </div>
+    <div class="footer">
+
+    </div>
+</body>
+</html>

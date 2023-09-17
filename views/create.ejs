@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/header.ejs') %>
+</head>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <div class="create-section">
+        <form action="/blog" method="post">
+            <div class="form-group">
+              <label for="formGroupExampleInput">Example label</label>
+              <input type="text" class="form-control" id="formGroupExampleInput" name="title" placeholder="Title">
+            </div>
+            <div class="form-group">
+              <label for="formGroupExampleInput">Example label</label>
+              <input type="text" class="form-control" id="formGroupExampleInput" name="snippet" placeholder="Snippet">
+            </div>
+            <div class="form-group">
+              <label for="formGroupExampleInput2">Another label</label>
+              <input type="text" class="form-control" id="formGroupExampleInput2" name="body" placeholder="Body">
+            </div>
+            <button type="submit" class="btn btn-danger">Submit</button>
+          </form>
+    </div>
+</body>
+</html>
