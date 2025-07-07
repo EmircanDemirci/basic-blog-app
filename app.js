@@ -1,8 +1,10 @@
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const session = require("express-session");
 const Blog = require("./models/blog");
-const blogRouters = require("./router/blogRouter")
+const blogRouters = require("./router/blogRouter");
+const userRouters = require("./router/users");
 
 
 //express app
@@ -27,11 +29,24 @@ app.engine('ejs', require('ejs').__express);
 //middleware and static files
 app.use(express.static('public'));
 app.use(express.urlencoded({extended:true}));
+app.use(express.json()); // JSON parsing için
 app.use(morgan('dev'));
+
+// Session konfigürasyonu
+app.use(session({
+    secret: 'your-secret-key-change-this-in-production', // Production'da güvenli bir secret kullanın
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: false, // HTTPS kullanıyorsanız true yapın
+        maxAge: 24 * 60 * 60 * 1000 // 24 saat (milisaniye)
+    }
+}));
 
 
 //mongoose and mongo sandbox routers
 app.use("/blog" , blogRouters);
+app.use("/api/users" , userRouters);
 
 
 //routers
