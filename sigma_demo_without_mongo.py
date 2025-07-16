@@ -1,4 +1,4 @@
-from sigma_similarity import SigmaSimilarity
+from sigma_similarity_enhanced import SigmaSimilarity
 from typing import Dict, List, Any, Union, Optional
 from datetime import datetime
 import json
