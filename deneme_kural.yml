@@ -1,0 +1,28 @@
+title: Suspicious PowerShell Execution Test
+id: 12345678-1234-1234-1234-123456789abc
+status: experimental
+description: Test rule for PowerShell execution
+author: Test Author
+date: 2024/01/15
+level: high
+logsource:
+    product: windows
+    service: security
+detection:
+    selection:
+        EventID: 4688
+        Image|endswith: 
+            - '\powershell.exe'
+            - '\pwsh.exe'
+        CommandLine|contains:
+            - '-ExecutionPolicy'
+            - '-enc'
+            - 'DownloadString'
+            - 'IEX'
+            - 'Invoke-Expression'
+    condition: selection
+falsepositives:
+    - Legitimate PowerShell scripts
+tags:
+    - attack.execution
+    - attack.t1059.001
