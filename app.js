@@ -5,6 +5,7 @@ const Blog = require("./models/blog");
 const blogRouters = require("./router/blogRouter");
 const productRouters = require("./router/productApi");
 const authRouters = require("./router/authApi");
+const testRouters = require("./router/testApi");
 
 
 //express app
@@ -13,15 +14,21 @@ const app = express();
 
 
 //connect to mongodb
-const dbURI = "mongodb+srv://venoox:test1234@cluster0.a9ct3mq.mongodb.net/?retryWrites=true&w=majority";
+const dbURI = "mongodb+srv://venoox:test1234@cluster0.a9ct3mq.mongodb.net/productdb?retryWrites=true&w=majority";
 mongoose.connect(dbURI , {useNewUrlParser:true,useUnifiedTopology:true})
 .then(result=>{
-    console.log("connected");
+    console.log("✅ MongoDB connected successfully");
     app.listen(3000, () => {
         console.log("🚀 Server running on http://localhost:3000");
     });
 })
-.catch((err)=> console.log(err));
+.catch((err)=> {
+    console.error("❌ MongoDB connection failed:", err.message);
+    // Start server anyway for testing
+    app.listen(3000, () => {
+        console.log("🚀 Server running on http://localhost:3000 (MongoDB connection failed)");
+    });
+});
 
 
 //view engine
@@ -39,6 +46,7 @@ app.use(morgan('dev'));
 app.use("/blog" , blogRouters);
 app.use("/api/products" , productRouters); // Product API routes eklendi
 app.use("/api/auth" , authRouters); // Auth API routes eklendi
+app.use("/api/test" , testRouters); // Test API routes eklendi
 
 
 //routers

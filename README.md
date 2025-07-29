@@ -259,6 +259,24 @@ Aşağıdaki JSON'ı kopyalayıp Postman'da **Import** → **Raw Text** ile içe
 
 ---
 
+## 🚨 Troubleshooting
+
+### Token ile ilgili "createdBy gereklidir" hatası:
+1. **Önce token alın**: `/api/test/get-test-token` endpoint'inden
+2. **Authorization header'ını doğru ekleyin**: `Bearer YOUR_TOKEN`
+3. **Token'ın expire olmadığından emin olun**
+
+### MongoDB Bağlantı Sorunları:
+- MongoDB Atlas'ta IP whitelist kontrolü yapın
+- Doğru database credentials kullandığınızdan emin olun
+- MongoDB bağlantı hatası olursa server yine de çalışır (test için)
+
+### Postman Kullanımı:
+1. İlk olarak test token alın
+2. Token'ı Authorization header'ına ekleyin
+3. Body'yi raw JSON olarak ayarlayın
+4. Gerekli tüm alanları doldurun
+
 ## 📞 Destek
 
 Herhangi bir sorun yaşarsanız:

@@ -40,7 +40,19 @@ router.get('/:id', async (req, res) => {
 // ✅ ÜRÜN OLUŞTUR (token gerekli)
 router.post('/', verifyToken(), async (req, res) => {
   try {
+    console.log("🔍 POST isteği geldi");
+    console.log("🔍 req.user:", req.user);
+    console.log("🔍 req.headers:", req.headers);
+    
     const { name, image, description, price, stock } = req.body;
+
+    // req.user kontrolü
+    if (!req.user || !req.user._id) {
+      console.error("❌ req.user veya req.user._id bulunamadı!");
+      return res.status(401).json({ 
+        error: 'Token doğrulaması başarısız - kullanıcı bilgisi eksik' 
+      });
+    }
 
     // Validation
     if (!name || !image || !description || price === undefined || stock === undefined) {
@@ -55,7 +67,7 @@ router.post('/', verifyToken(), async (req, res) => {
       });
     }
 
-    console.log("User ID:", req.user._id);
+    console.log("✅ User ID:", req.user._id);
 
     const newProduct = new Product({
       name,
