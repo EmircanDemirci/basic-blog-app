@@ -2,7 +2,9 @@ const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const Blog = require("./models/blog");
-const blogRouters = require("./router/blogRouter")
+const blogRouters = require("./router/blogRouter");
+const productRouters = require("./router/productApi");
+const authRouters = require("./router/authApi");
 
 
 //express app
@@ -15,7 +17,9 @@ const dbURI = "mongodb+srv://venoox:test1234@cluster0.a9ct3mq.mongodb.net/?retry
 mongoose.connect(dbURI , {useNewUrlParser:true,useUnifiedTopology:true})
 .then(result=>{
     console.log("connected");
-    app.listen(4000);
+    app.listen(3000, () => {
+        console.log("🚀 Server running on http://localhost:3000");
+    });
 })
 .catch((err)=> console.log(err));
 
@@ -27,11 +31,14 @@ app.engine('ejs', require('ejs').__express);
 //middleware and static files
 app.use(express.static('public'));
 app.use(express.urlencoded({extended:true}));
+app.use(express.json()); // JSON parser middleware eklendi
 app.use(morgan('dev'));
 
 
 //mongoose and mongo sandbox routers
 app.use("/blog" , blogRouters);
+app.use("/api/products" , productRouters); // Product API routes eklendi
+app.use("/api/auth" , authRouters); // Auth API routes eklendi
 
 
 //routers

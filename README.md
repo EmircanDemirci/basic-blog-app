@@ -42,7 +42,16 @@ Server: `http://localhost:3000`
 
 ## 🔐 Token Alma (Önce Bu İşlemi Yapın!)
 
-### Login İsteği (Eğer login API'niz varsa)
+### ⚡ Test Token Al (Hızlı Yol)
+```
+Method: POST
+URL: {{baseUrl}}/api/auth/get-test-token
+Headers:
+  Content-Type: application/json
+Body: (Boş bırakın)
+```
+
+### 🔑 Normal Login
 ```
 Method: POST
 URL: {{baseUrl}}/api/auth/login
@@ -51,8 +60,8 @@ Headers:
 
 Body (raw - JSON):
 {
-  "email": "your-email@example.com",
-  "password": "your-password"
+  "email": "test@example.com",
+  "password": "testpassword"
 }
 ```
 
